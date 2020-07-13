@@ -4,12 +4,13 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+#### Always learning <br>
+#### Always trying harder <br>
+#### Always breaking things <br>
 
-### More Information
+<br>
+<br>
 
-A place to include any other types of information that you'd like to include about yourself.
-
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
+* Twitter : [@M0nst4h](https://twitter.com/M0nst4h)
+* Github : [Monstah](https://github.com/monstah)
+* Reddit : [u/Monstah_](https://www.reddit.com/user/Monstah_)
