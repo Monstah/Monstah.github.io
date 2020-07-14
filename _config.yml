@@ -1,9 +1,9 @@
-site: Sidey
-url: #yoururl
-title: Sidey
-description: Simple and minimalistic jekyll blogging theme.
+site: monstah.github.io
+url: monstah.github.io
+title: monstah.github.io
+description: InfoSec Blog, Writeups, and Cheatsheets
 twitter:
-  username: #yourusername
+  username: M0nst4h
   card: summary
   creator: #yourusername
 author:
@@ -20,7 +20,7 @@ highlighter: none
 
 exclude:
   - .jekyll-cache
-  
+
 compress_html:
   clippings: all
   comments: ["<!-- ", " -->"]
@@ -32,7 +32,7 @@ sass:
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
-  - jekyll-sitemap  
+  - jekyll-sitemap
 
 collections:
   pages:
@@ -41,7 +41,7 @@ collections:
   posts:
     output: true
     permalink: /:year/:month/:day/:slug
-  
+
 defaults:
   -
     scope:
